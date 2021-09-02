@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
+  <title>Pedro Car's</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -26,6 +26,27 @@
   <h2>Contagem de carros: ${usados.size()}</h2>
   <h3><a href="/telacadcarro">Incluir novo carro</a></h3>
 
+
+<c:if test="${not empty usados}">
+	
+	<form action="/todosusadorOrdenar" method="post">
+		<div class="input-group">
+			<select name="sortBy" class="form-control">
+				<option value="placa">Placa</option>
+				<option value="modelo">Modelo</option>
+				<option value="montadora">Montadora</option>
+				<option value="anoMod">Ano modelo</option>
+			</select>
+			<div class="input-group-btn">
+				<button class="btn btn-default" type="submit"><i class="glyphicon-sort-by-alphabet"></i></button>
+			</div>
+		
+		
+		</div>
+	
+	
+	
+	</form>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -37,21 +58,21 @@
 			</tr>
 		</thead>
 			<tbody>
-				<c:if test="${not empty usados}">
+
 				<c:forEach var="usado" items="${usados}">
 					<tr>
 						<td>${usado.id}</td>
 						<td>${usado.placa}</td>
 						<td>${usado.modelo}</td>
-						<td><a href="#">Detalhes</a></td>
+						<td><a href="/consultarCarro/${usado.id}/">Detalhes</a></td>
 						<td><a href="/delCarro/${usado.id}/">Excluir</a></td>
 					</tr>
 				</c:forEach>
-				</c:if>
+				
 
 			</tbody>
 	</table>
-
+</c:if>
 				<c:if test="${empty usados}">
 					<h4>Nenhum carro cadastrado.</h4>
 				</c:if>

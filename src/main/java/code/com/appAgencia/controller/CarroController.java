@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import code.com.appAgencia.model.domain.Carro;
 import code.com.appAgencia.model.service.CarroService;
@@ -38,9 +39,14 @@ public class CarroController {
 		return obterUsados(model);
 	}
 	
-	@GetMapping(value = "/consultarCarro")
-	public String consultarCarro() {
-		return "";
+	@GetMapping(value = "/consultarCarro/{id}/")
+	public String consultarCarro(Model model, @PathVariable Integer id) {
+		
+		Carro carro = carrosService.obterUsadoPorId(id);
+		
+		model.addAttribute("carroDetalhado",carro);
+		
+		return "carros/cadcarro";
 	}
 	
 	@GetMapping(value = "/delCarro/{id}/")
@@ -62,5 +68,19 @@ public class CarroController {
 		
 		return "carros/todosusados";
 	}
+	
+	@GetMapping(value = "/voltar")
+	public String voltar(Model model) {
+				
+		return "redirect:carros/todosusados";
+	}
 
+	@PostMapping(value = "/todosusadorOrdenar")
+	public String OrdenarUsados(@RequestParam String sortBy, Model model) {
+		
+		model.addAttribute("usados", carrosService.obterListaCarros(sortBy));
+		
+		return "carros/todosusados";
+	}
+	
 }

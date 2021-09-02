@@ -3,6 +3,7 @@ package code.com.appAgencia.model.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import code.com.appAgencia.model.domain.Carro;
@@ -17,7 +18,12 @@ public class CarroService {
 	
 	public List<Carro> obterListaCarros(){			
 		
-		return (List<Carro>) carroRepository.findAll();
+		return (List<Carro>) carroRepository.findAll(Sort.by(Sort.Direction.ASC,"anoMod"));
+	}
+	
+	public List<Carro> obterListaCarros(String sortBy){			
+		
+		return (List<Carro>) carroRepository.findAll(Sort.by(Sort.Direction.ASC,sortBy));
 	}
 	
 	public void incluirUsado(Carro usado) {
