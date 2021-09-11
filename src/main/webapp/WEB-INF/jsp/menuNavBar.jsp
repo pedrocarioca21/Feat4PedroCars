@@ -5,7 +5,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="/">Home</a></li>
-      <li><a href="/carros/todosusados">Semi-novos</a></li>
+      <li><a href="/carros/todosusados">Carros</a></li>
+      <li><a href="/usuarios/listausuario">Usuários</a></li>
     </ul>
   </div>
 </nav>

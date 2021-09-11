@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 
 @Entity
 
@@ -21,6 +23,16 @@ public class Carro {
 	private boolean completo;
 	private boolean gnv;
 	private boolean flex;
+	@OneToOne
+	private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Integer getId() {
 		return id;
@@ -105,6 +117,5 @@ public class Carro {
 	public void setFlex(boolean flex) {
 		this.flex = flex;
 	}
-	
-	
+
 }

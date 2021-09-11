@@ -38,6 +38,16 @@
   <h2>${titulo}</h2>
   
   <form action="${rota}" method="${metodo}">
+
+	<div class="form-group">
+		<label>Vendedor:</label>
+		<select  name="usuario.id" class="form-control">
+			<c:forEach var="user" items="${usuarios}">
+				<option value="${user.id}">${user.nome}</option>
+			</c:forEach>
+		</select>
+	</div>
+
     <div class="form-group">
       <label>Placa:</label>
       <input type="text" contenteditable="${editavel}" class="form-control" value="${carroDetalhado.placa}" placeholder="Ex: KXH-9932" name="placa">

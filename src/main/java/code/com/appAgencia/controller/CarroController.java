@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import code.com.appAgencia.model.domain.Carro;
 import code.com.appAgencia.model.service.CarroService;
+import code.com.appAgencia.model.service.UsuarioService;
 
 
 @Controller
@@ -18,14 +19,20 @@ public class CarroController {
 	
 	@Autowired
 	private CarroService carrosService;
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping(value = "/")
 	public String inicializa() {
+		
 		return "index";
 	}
 
 	@GetMapping(value = "/telacadcarro")
-	public String telaCadCarro() {
+	public String telaCadCarro(Model model) {
+		
+		model.addAttribute("usuarios", usuarioService.obterListaUsuarios());
+		
 		return "carros/cadcarro";
 	}
 	
@@ -46,7 +53,7 @@ public class CarroController {
 		
 		model.addAttribute("carroDetalhado",carro);
 		
-		return "carros/cadcarro";
+		return telaCadCarro(model);
 	}
 	
 	@GetMapping(value = "/delCarro/{id}/")
